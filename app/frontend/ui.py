@@ -8,18 +8,18 @@ from app.utils.modelhelper_code_alignment import aligner
 from app.utils.modelhelper_docstring_gen import generating_docstring
 from pathlib import Path
 import os
-
+logo_path = os.path.join(Path(__file__).parts[0], "resources" , "logo.png")
 # Page config
-st.set_page_config(page_title="DocuMentor", layout="centered")
+st.set_page_config(page_title="DocuMentor",page_icon= logo_path)
 
 # Load logo (ensure it's in correct path)
-logo_path = Path(__file__).parent / "resources" / "logo.png"
-if logo_path.exists():
+
+if os.path.exists(logo_path):
     col_logo, col_title = st.columns([1, 4])
     with col_logo:
-        st.image(logo_path, width=60)
+        st.image(logo_path, width=100)
     with col_title:
-        st.markdown("<h1 style='padding-top: 12px;'>DocuMentor</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='padding-top: 12px; margin-left: -20px;font-size: 5rem;'>DocuMentor</h1>", unsafe_allow_html=True)
 else:
     st.markdown("<h1>DocuMentor</h1>", unsafe_allow_html=True)
 
