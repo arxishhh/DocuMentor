@@ -1,7 +1,6 @@
 from fastapi import FastAPI,File,UploadFile
 from app.utils.modelhelper_code_alignment import aligner
 from app.utils.modelhelper_docstring_gen import generating_docstring
-from uuid import uuid4
 import os
 app = FastAPI()
 @app.get("/")

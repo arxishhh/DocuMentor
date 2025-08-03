@@ -1,8 +1,8 @@
 import streamlit as st
-from PIL import Image
+from app.utils.modelhelper_code_alignment import aligner
+from app.utils.modelhelper_docstring_gen import generating_docstring
 from pathlib import Path
-import requests
-import pandas as pd
+import os
 
 # Page config
 st.set_page_config(page_title="DocuMentor", layout="centered")
@@ -27,21 +27,22 @@ uploaded_file = st.file_uploader(
 )
 # Action Buttons
 if uploaded_file:
+    with open('file.py', 'wb') as f:
+        f.write(uploaded_file.getbuffer())
+
     col1, col2 = st.columns(2)
 
     with col1:
-        aligner = st.button("🔍 Code Comment Alignment", use_container_width=True)
+        alignment = st.button("🔍 Code Comment Alignment", use_container_width=True)
 
     with col2:
         doc = st.button("📄 Docstring Generator", use_container_width=True)
 
-    if aligner:
-        file = {'file': (uploaded_file.name, uploaded_file.getbuffer(), uploaded_file.type)}
-        response = requests.post("http://127.0.0.1:8080/comment_align",files = file)
+    if alignment:
+        df = aligner('file.py')
         st.markdown("<h2 style='text-align: center;'>🔍 Code-Comment Alignment Results</h2>", unsafe_allow_html=True)
         st.markdown("---")
-        data = response.json()['Final DataFrame']
-        df = pd.DataFrame(data)
+
         for i, row in df.iterrows():
             with st.expander(f"🔹 Function {int(i) + 1}", expanded=False):
                 col1, col2 = st.columns([1, 2])
@@ -60,11 +61,9 @@ if uploaded_file:
                     st.badge(f"**Status:** {status}",color = 'green')
                 else :
                     st.badge(f"**Status:** {status}",color = 'red')
+        os.remove('file.py')
     elif doc:
-        file = {'file': (uploaded_file.name, uploaded_file.getbuffer(), uploaded_file.type)}
-        response = requests.post("http://127.0.0.1:8080/docstring", files=file)
-        data = response.json()['Final DataFrame']
-        df = pd.DataFrame(data)
+        df = generating_docstring('file.py')
         st.subheader("📂 Function Viewer")
         for i, row in df.iterrows():
             with st.container():
@@ -73,6 +72,7 @@ if uploaded_file:
                     st.code(row['Code'], language='python')
                 with tab2:
                     st.markdown(f"```python\n{row['DocString']}\n```")
+        os.remove('file.py')
 
 
 
