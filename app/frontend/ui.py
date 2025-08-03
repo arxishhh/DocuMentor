@@ -1,3 +1,8 @@
+import sys
+import os
+
+# Add project root to Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 import streamlit as st
 from app.utils.modelhelper_code_alignment import aligner
 from app.utils.modelhelper_docstring_gen import generating_docstring
