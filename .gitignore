@@ -6,7 +6,7 @@ venv
 .env
 dataset
 Notebook
-documentor-alignment-model
+
 # C extensions
 *.so
 
