@@ -6,7 +6,7 @@ venv
 .env
 dataset
 Notebook
-testvenv
+testenv
 # C extensions
 *.so
 
