@@ -1,7 +1,5 @@
 import sys
 import os
-
-# Add project root to Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 import streamlit as st
 from app.utils.modelhelper_code_alignment import aligner
@@ -36,7 +34,6 @@ if uploaded_file:
         f.write(uploaded_file.getbuffer())
 
     col1, col2 = st.columns(2)
-
     with col1:
         alignment = st.button("🔍 Code Comment Alignment", use_container_width=True)
 

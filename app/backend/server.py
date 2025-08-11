@@ -1,4 +1,4 @@
-from fastapi import FastAPI,File,UploadFile
+from fastapi import FastAPI,File,UploadFile,HTTPException
 from app.utils.modelhelper_code_alignment import aligner
 from app.utils.modelhelper_docstring_gen import generating_docstring
 import os
@@ -14,9 +14,9 @@ async def comment_align(file : UploadFile = File(...)):
         f.write(content)
     try :
         dataframe = aligner(path)
-        return {'Final DataFrame': dataframe}
+        return {'data': dataframe.to_dict('records')}
     except Exception as e:
-        print("Error :",str(e))
+        raise HTTPException(status_code=500, detail=f"Processing error: {str(e)}")
     finally :
         os.remove(path)
 
@@ -28,9 +28,9 @@ async def docstring(file : UploadFile = File(...)):
         f.write(content)
     try :
         dataframe = generating_docstring(path)
-        return {'Final DataFrame': dataframe}
+        return {'data': dataframe.to_dict('records')}
     except Exception as e:
-        print("Error :",str(e))
+        raise HTTPException(status_code=500, detail=f"Processing error: {str(e)}")
     finally :
         os.remove(path)
 
