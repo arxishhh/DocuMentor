@@ -2,6 +2,12 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/Notebook" />
+      <excludeFolder url="file://$MODULE_DIR$/Notebook/.idea/inspectionProfiles" />
+      <excludeFolder url="file://$MODULE_DIR$/Notebook/.ipynb_checkpoints" />
+      <excludeFolder url="file://$MODULE_DIR$/dataset" />
+      <excludeFolder url="file://$MODULE_DIR$/dataset/.idea/inspectionProfiles" />
+      <excludeFolder url="file://$MODULE_DIR$/main/.ipynb_checkpoints" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 virtualenv at C:\Projects\DocuMentor\venv (2)" jdkType="Python SDK" />
