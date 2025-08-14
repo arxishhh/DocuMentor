@@ -12,7 +12,7 @@ It ensures your code documentation is accurate, consistent, and professional —
 
 ## ✨ Features
 - ✅ **Automatic Code-Comment Analysis** — Detects poor or misaligned code comments.
-- 📝 **AI-Powered Docstring Generation** — Generates high-quality, PEP 257-compliant docstrings.
+- 📝 **AI-Powered Docstring Generation** — Generates high-quality docstrings.
 - ⚡ **FastAPI Backend** — High-performance API server for processing.
 - 🌐 **Streamlit Frontend** — Clean, interactive UI for easy use.
 - 🐳 **Docker Support** — Simple containerized deployment.
@@ -27,7 +27,7 @@ It ensures your code documentation is accurate, consistent, and professional —
 ![Docstring Generation Screenshot](assets/docstring_generation.png)
 
 ## 🚀 Live Demo
-[Try DocuMentor here](your-streamlit-link) – Fully functional Streamlit UI version (includes all logic internally for deployment purposes).
+[Try DocuMentor here](https://documentor-gen.streamlit.app/) – Fully functional Streamlit UI version (includes all logic internally for deployment purposes).
 
 > Note: The project also has a FastAPI backend that can be run locally.  
 > Due to deployment size constraints, the deployed demo uses the backend logic embedded directly into the Streamlit app.

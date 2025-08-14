@@ -52,7 +52,7 @@ Code
 {code}
     '''
     response = []
-    llm = ChatGroq(api_key = os.environ.get("GROQ_API_KEY") ,model = 'llama-3.3-70b-versatile',temperature = 0.9)
+    llm = ChatGroq(api_key = os.environ.get("GROQ_API_KEY") ,model = os.environ.get('AI_MODEL'),temperature = 0.9)
     pt = PromptTemplate.from_template(prompt)
     chain = pt | llm
     for code in functions:
