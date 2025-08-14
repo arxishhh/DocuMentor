@@ -1,5 +1,6 @@
 import pandas as pd
 from langchain_groq import ChatGroq
+import os
 from langchain_core.prompts import PromptTemplate
 from dotenv import load_dotenv
 from main.backend.utils.code_comment_extractor import finding_func
@@ -51,7 +52,7 @@ Code
 {code}
     '''
     response = []
-    llm = ChatGroq(model = 'llama-3.3-70b-versatile',temperature = 0.9)
+    llm = ChatGroq(api_key = os.environ.get("GROQ_API_KEY") ,model = 'llama-3.3-70b-versatile',temperature = 0.9)
     pt = PromptTemplate.from_template(prompt)
     chain = pt | llm
     for code in functions:
