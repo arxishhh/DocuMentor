@@ -2,13 +2,13 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Copy requirements.txt first (make sure it's in backend/)
-COPY requirements.txt .
+# Copy requirements.txt first
+COPY ../../requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all backend source code (main and utils folders)
+# Copy all backend source code
 COPY ./app ./app
 COPY ./utils ./utils
 
