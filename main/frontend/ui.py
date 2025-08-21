@@ -45,7 +45,7 @@ if uploaded_file:
         st.markdown("<h2 style='text-align: center;'>🔍 Code-Comment Alignment Results</h2>", unsafe_allow_html=True)
         st.markdown("---")
 
-        if df:
+        if df is not None:
             for i, row in df.iterrows():
                 with st.expander(f"🔹 Function {int(i) + 1}", expanded=False):
                     col1, col2 = st.columns([1, 2])
