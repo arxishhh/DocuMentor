@@ -29,7 +29,7 @@ def tokenizer_function(code,comment):
 
 def process(file):
     code_comment = comment_extractor(file)
-    if code_comment:
+    if len(code_comment) != 0:
         df = pd.DataFrame(code_comment)
         ids, am = tokenizer_function(df['Code'].values.tolist(), df['Comment'].values.tolist())
         dataset = TensorDataset(ids, am)
@@ -59,6 +59,6 @@ def aligner(file):
         df['Labels'] = df['Labels'].map({0: 'Not Aligned', 1: 'Aligned'})
         return df
 if __name__ == '__main__':
-    df = aligner(r"C:\Projects\InvestiSense-AI\app\backend\utils\rag_pipeline.py")
+    df = aligner(r"C:\Projects\InvestiSense-AI\app\backend\utils\real_time_data_tool.py")
     print(df.head())
     print(df.columns)
