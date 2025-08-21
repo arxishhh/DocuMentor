@@ -29,32 +29,36 @@ def tokenizer_function(code,comment):
 
 def process(file):
     code_comment = comment_extractor(file)
-    df = pd.DataFrame(code_comment)
-    ids,am = tokenizer_function(df['Code'].values.tolist(),df['Comment'].values.tolist())
-    dataset = TensorDataset(ids,am)
-    loader = DataLoader(dataset,batch_size=len(dataset),shuffle = False)
-    return loader,df
+    if code_comment:
+        df = pd.DataFrame(code_comment)
+        ids, am = tokenizer_function(df['Code'].values.tolist(), df['Comment'].values.tolist())
+        dataset = TensorDataset(ids, am)
+        loader = DataLoader(dataset, batch_size=len(dataset), shuffle=False)
+        return loader, df
+    else:
+        return None,None
 
 def aligner(file):
     loader,df = process(file)
-    model = AlignmentClassifier()
-    model.load_state_dict(torch.load(model_path))
-    model = model.to(device)
-    model.eval()
-    labels = []
-    with torch.no_grad():
-        for batch in loader:
-            ids,am = batch[0],batch[1]
-            ids = ids
-            am = am
-            output = model(ids,am)
-            logits = output.logits
-            pred = logits.argmax(dim = 1)
-            labels.extend(pred.numpy())
-    df['Labels'] = labels
-    df['Labels'] = df['Labels'].map({0:'Not Aligned',1:'Aligned'})
-    return df
+    if df:
+        model = AlignmentClassifier()
+        model.load_state_dict(torch.load(model_path))
+        model = model.to(device)
+        model.eval()
+        labels = []
+        with torch.no_grad():
+            for batch in loader:
+                ids, am = batch[0], batch[1]
+                ids = ids
+                am = am
+                output = model(ids, am)
+                logits = output.logits
+                pred = logits.argmax(dim=1)
+                labels.extend(pred.numpy())
+        df['Labels'] = labels
+        df['Labels'] = df['Labels'].map({0: 'Not Aligned', 1: 'Aligned'})
+        return df
 if __name__ == '__main__':
-    df = aligner('sample.py')
+    df = aligner(r"C:\Projects\InvestiSense-AI\app\backend\utils\rag_pipeline.py")
     print(df.head())
     print(df.columns)

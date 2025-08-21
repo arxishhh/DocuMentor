@@ -17,7 +17,7 @@ def finding_func(file):
     func_doc = []
     tree,atok = processing_file(file)
     for node in ast.walk(tree):
-        if isinstance(node, ast.FunctionDef):
+        if isinstance(node, ast.FunctionDef) or isinstance(node, ast.AsyncFunctionDef):
             code = atok.get_text(node)
             func_doc.append(code)
     return func_doc
@@ -47,4 +47,5 @@ def comment_extractor(file):
                 })
     return com_cod
 if __name__ == '__main__':
-    print(comment_extractor('sample.py'))
+    print(comment_extractor(r"C:\Projects\InvestiSense-AI\app\backend\utils\rag_pipeline.py"))
+    print(finding_func(r"C:\Projects\InvestiSense-AI\app\backend\utils\rag_pipeline.py"))

@@ -45,25 +45,28 @@ if uploaded_file:
         st.markdown("<h2 style='text-align: center;'>🔍 Code-Comment Alignment Results</h2>", unsafe_allow_html=True)
         st.markdown("---")
 
-        for i, row in df.iterrows():
-            with st.expander(f"🔹 Function {int(i) + 1}", expanded=False):
-                col1, col2 = st.columns([1, 2])
+        if df:
+            for i, row in df.iterrows():
+                with st.expander(f"🔹 Function {int(i) + 1}", expanded=False):
+                    col1, col2 = st.columns([1, 2])
 
-                with col1:
-                    st.markdown("**🧠 Code:**")
-                    st.code(row['Code'], language='python')
+                    with col1:
+                        st.markdown("**🧠 Code:**")
+                        st.code(row['Code'], language='python')
 
-                with col2:
-                    st.markdown("**💬 Comment:**")
-                    st.markdown(f"`{row['Comment']}`")
+                    with col2:
+                        st.markdown("**💬 Comment:**")
+                        st.markdown(f"`{row['Comment']}`")
 
-                # Alignment Status
-                status = row['Labels']
-                if status == "Aligned":
-                    st.badge(f"**Status:** {status}",color = 'green')
-                else :
-                    st.badge(f"**Status:** {status}",color = 'red')
-        os.remove('file.py')
+                    # Alignment Status
+                    status = row['Labels']
+                    if status == "Aligned":
+                        st.badge(f"**Status:** {status}", color='green')
+                    else:
+                        st.badge(f"**Status:** {status}", color='red')
+            os.remove('file.py')
+        else:
+            st.markdown("<h2 style='text-align: center;'>No Code-Comment Pair Found</h2>", unsafe_allow_html=True)
     elif doc:
         df = generating_docstring('file.py')
         st.subheader("📂 Function Viewer")

@@ -63,6 +63,6 @@ Code
     return df
 
 if __name__ == '__main__':
-    print(generating_docstring('sample.py'))
+    print(generating_docstring(r"C:\Projects\InvestiSense-AI\app\backend\utils\rag_pipeline.py"))
 
 
