@@ -2,8 +2,8 @@ import ast
 import asttokens
 import re
 
-inline_comment = re.compile(r'^(?P<code>.*?\S)\s+#(?P<comment>.*)$')
-above_line_comment = re.compile(r'^\s*#(?P<comment>.+)$')
+inline_comment = re.compile(r'^(?P<code>.*?)\s*#\s*(?P<comment>[^#]*)#?$')
+above_line_comment = re.compile(r'^\s*#\s*(?P<comment>[^#]*)#?.*$')
 
 def processing_file(file):
     with open(file, 'r',encoding="utf-8") as f:

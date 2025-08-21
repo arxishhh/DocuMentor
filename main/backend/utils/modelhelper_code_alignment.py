@@ -29,7 +29,9 @@ def tokenizer_function(code,comment):
 
 def process(file):
     code_comment = comment_extractor(file)
+    print(code_comment)
     if len(code_comment) != 0:
+        print('Entry')
         df = pd.DataFrame(code_comment)
         ids, am = tokenizer_function(df['Code'].values.tolist(), df['Comment'].values.tolist())
         dataset = TensorDataset(ids, am)
@@ -40,7 +42,7 @@ def process(file):
 
 def aligner(file):
     loader,df = process(file)
-    if df:
+    if df is not None:
         model = AlignmentClassifier()
         model.load_state_dict(torch.load(model_path))
         model = model.to(device)
@@ -59,6 +61,6 @@ def aligner(file):
         df['Labels'] = df['Labels'].map({0: 'Not Aligned', 1: 'Aligned'})
         return df
 if __name__ == '__main__':
-    df = aligner(r"C:\Projects\InvestiSense-AI\app\backend\utils\replier.py")
+    df = aligner(r"C:\Projects\InvestiSense-AI\app\backend\utils\sql_query_generator.py")
     print(df.head())
     print(df.columns)
