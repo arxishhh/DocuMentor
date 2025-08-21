@@ -6,7 +6,7 @@ inline_comment = re.compile(r'^(?P<code>.*?\S)\s+#(?P<comment>.*)$')
 above_line_comment = re.compile(r'^\s*#(?P<comment>.+)$')
 
 def processing_file(file):
-    with open(file, 'r') as f:
+    with open(file, 'r',encoding="utf-8") as f:
         files = f.read()
     atok = asttokens.ASTTokens(files, parse=True)
     tree = atok.tree
@@ -47,5 +47,5 @@ def comment_extractor(file):
                 })
     return com_cod
 if __name__ == '__main__':
-    print(comment_extractor(r"C:\Projects\InvestiSense-AI\app\backend\utils\rag_pipeline.py"))
-    print(finding_func(r"C:\Projects\InvestiSense-AI\app\backend\utils\rag_pipeline.py"))
+    print(comment_extractor(r"C:\Projects\InvestiSense-AI\app\backend\utils\replier.py"))
+    print(finding_func(r"C:\Projects\InvestiSense-AI\app\backend\utils\replier.py"))

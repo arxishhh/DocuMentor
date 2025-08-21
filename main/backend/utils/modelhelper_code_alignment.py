@@ -59,6 +59,6 @@ def aligner(file):
         df['Labels'] = df['Labels'].map({0: 'Not Aligned', 1: 'Aligned'})
         return df
 if __name__ == '__main__':
-    df = aligner(r"C:\Projects\InvestiSense-AI\app\backend\utils\real_time_data_tool.py")
+    df = aligner(r"C:\Projects\InvestiSense-AI\app\backend\utils\replier.py")
     print(df.head())
     print(df.columns)
